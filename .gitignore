@@ -1,2 +1,13 @@
-./venv/
-venv
+.env
+venv/*
+*.log
+*.pot
+*.pyc
+*/__pycache__/
+x_*
+static/*
+staticfiles/*
+media/*
+
+# vs code files
+.vscode
