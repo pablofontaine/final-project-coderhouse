@@ -1,0 +1,39 @@
+{% extends '../home/index.html' %}
+
+{% block blog_header %}
+<!-- Page Header-->
+<header class="masthead"
+    style="background-image: url('https://cdn.pixabay.com/photo/2016/11/29/01/14/athletes-1866487_960_720.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Eliminar</h1>
+                    <span class="subheading">{{ tennisplayer.name }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block blog_main %}
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+
+            <h3>Eliminar jugador</h3>
+
+            <p>Confirma que quieres eliminar el jugador {{ tennisplayer.name }}</p>
+
+            <form method="POST">
+                {% csrf_token %}
+                <input class="btn btn-danger" type="submit" value="Si, eliminar">
+                <a class="btn btn-secondary" href="{% url 'players:players-list' %}">No, cancelar</a>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
