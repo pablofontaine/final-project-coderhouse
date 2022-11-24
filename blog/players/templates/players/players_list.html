@@ -1,0 +1,48 @@
+{% extends '../home/index.html' %}
+
+{% block blog_header %}
+<!-- Page Header-->
+<header class="masthead"
+    style="background-image: url('https://cdn.pixabay.com/photo/2016/11/29/01/14/athletes-1866487_960_720.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Jugadores</h1>
+                    <span class="subheading">Los mejores jugadores del tenis</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block blog_main %}
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+
+            {% if message %}
+            {{ message }}
+            {% endif %}
+
+            {% for player in tennisplayer_list %}
+            <ul>
+                <h4>{{ player.name }}</h4>
+                <li>Pais: {{ player.country }}</li>
+                {% if player.retired == True %}
+                    <li>Estado: Retirado</li>
+                {% else %}
+                    <li>Estado: En competencia</li>
+                {% endif %}
+           </ul>
+           <a class="btn" href="{% url 'players:players-detail' player.id %}">Ver detalles</a>
+           <hr>
+           {% endfor %}
+
+            <a href="{% url 'players:players-add' %}" class="btn btn-primary">Crear nuevo jugador</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

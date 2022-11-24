@@ -1,0 +1,41 @@
+{% extends '../home/index.html' %}
+
+{% block blog_header %}
+<!-- Page Header-->
+<header class="masthead"
+    style="background-image: url('https://cdn.pixabay.com/photo/2016/11/29/01/14/athletes-1866487_960_720.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Todo sobre</h1>
+                    <span class="subheading">{{ tennisplayer.name }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block blog_main %}
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+
+            <ul>
+                <li>Pais: {{ tennisplayer.country }}</li>
+                {% if tennisplayer.retired == True %}
+                    <li>Estado: Retirado</li>
+                {% else %}
+                    <li>Estado: En competencia</li>
+                {% endif %}
+            </ul>
+
+            <a class="btn btn-primary" href="{% url 'players:players-update' tennisplayer.id %}">Modificar</a>
+            <a class="btn btn-danger" href="{% url 'players:players-delete' tennisplayer.id %}">Eliminar</a>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
