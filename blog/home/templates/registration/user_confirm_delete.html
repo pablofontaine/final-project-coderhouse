@@ -1,4 +1,9 @@
 {% extends '../home/index.html' %}
+{% load static %}
+
+{% block blog_title %}
+<title>Tenis+ | Confirmar eliminación</title>
+{% endblock %}
 
 {% block blog_header %}
 <!-- Page Header-->
@@ -8,7 +13,7 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
-                    <h1>Todo sobre</h1>
+                    <h2>Eliminar cuenta</h2>
                     <span class="subheading">{{ user.username }}</span>
                 </div>
             </div>
@@ -23,13 +28,15 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
 
-            <ul>
-                <li>Nombre y apellido: {{user.first_name}} {{user.last_name}}</li>
-                <li>Correo: {{user.email}}</li>
-            </ul>
+            <h3>Eliminar cuenta</h3>
 
-            <a class="btn btn-primary" href="{% url 'home:user-update' user.id %}">Modificar</a>
-            <a class="btn btn-danger" href="{% url 'home:user-delete' user.id %}">Eliminar</a>
+            <p>Confirma que quieres eliminar tu cuenta <b>{{ user.username }}</b></p>
+
+            <form method="POST">
+                {% csrf_token %}
+                <input class="btn btn-danger" type="submit" value="Si, eliminar">
+                <a class="btn btn-secondary" href="{% url 'home:user-detail' user.id %}">No, cancelar</a>
+            </form>
 
         </div>
     </div>

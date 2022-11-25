@@ -11,7 +11,7 @@
     <meta name="author" content="" />
 
     {% block blog_title %}
-    <title>TenisPlus</title>
+    <title>Tenis+</title>
     {% endblock %}
 
     <link rel="icon" type="image/x-icon" href="{% static 'home/assets/favicon.ico' %}" />
@@ -31,7 +31,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="index.html">TenisPlus</a>
+            <a class="navbar-brand" href="{% url 'home:index' %}">Tenis+</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
@@ -41,10 +41,16 @@
                 <ul class="navbar-nav ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
                             href="{% url 'home:index' %}">Noticias</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#!">Jugadores</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#!">Nosotros</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#!">Contacto</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#!">Login</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
+                            href="{% url 'players:players-list' %}">Jugadores</a></li>
+
+                    {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'home:user-detail' user.id %}">Mi cuenta</a></li>                   
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout' %}">Logout</a></li>                   
+                    {% else %}
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'login' %}">Iniciar
+                            sesión</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -58,7 +64,7 @@
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="site-heading">
-                        <h1>Tenis Plus</h1>
+                        <h1>Noticias</h1>
                         <span class="subheading">Toda la información del mundo del tenis</span>
                     </div>
                 </div>

@@ -1,0 +1,47 @@
+{% extends '../home/index.html' %}
+{% load static %}
+
+{% block blog_title %}
+<title>Tenis+ | Registrarse</title>
+{% endblock %}
+
+{% block blog_header %}
+<!-- Page Header-->
+<header class="masthead"
+    style="background-image: url('https://cdn.pixabay.com/photo/2016/05/09/11/09/tennis-1381230_960_720.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h2>Crear cuenta</h2>
+                    <span class="subheading">¡Bienvenid@! Crea tu cuenta para empezar</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block blog_main %}
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <h3>Complete su información</h3>
+
+            {% if error %}
+                <p>El usuario o la contraseña son incorrectos</p>
+            {% endif %}   
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Registrar usuario" class="btn btn-primary">
+                <a class="btn btn-secondary" href="{% url 'login' %}">Iniciar sesión</a>
+            </form>
+
+            <!-- Quedé en el minuto 50' del video Playground Avanzado 2 -->
+
+        </div>
+    </div>
+</div>
+{% endblock %}
