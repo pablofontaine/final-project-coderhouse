@@ -1,0 +1,73 @@
+{% extends '../home/index.html' %}
+{% load static %}
+
+{% block blog_title %}
+<title>Tenis+ | Crear/modificar noticia</title>
+{% endblock %}
+
+{% block blog_header %}
+<!-- Page Header-->
+<header class="masthead"
+    style="background-image: url('https://cdn.pixabay.com/photo/2016/11/29/01/14/athletes-1866487_960_720.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    {% if user.id == new.author.id %}
+                    <h2>Crear/modificar noticia</h2>
+                    <p>{{ user.username }}</p>
+                    {% else %}
+                    <h2>No tienes permisos</h2>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block blog_main %}
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+
+            <h3>Datos de la noticia</h3>
+
+            {% if message_succes %}
+            <p>{{ message_succes }}</p>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input class="btn btn-primary" type="submit" value="Confirmar">
+                <a class="btn btn-secondary" href="{% url 'home:index' %}">No, cancelar</a>
+            </form>
+
+            <!--
+            {% if user.id == new.author.id %}
+            <h3>Datos de la noticia</h3>
+
+            {% if message_succes %}
+            <p>{{ message_succes }}</p>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input class="btn btn-primary" type="submit" value="Confirmar">
+                <a class="btn btn-secondary" href="{% url 'home:index' %}">No, cancelar</a>
+            </form>
+            {% else %}
+            <p>No eres autor de esta noticia, y no puedes modificarla.<br>
+                Si crees que se trata de un error, contacta a un administrador.
+            </p>
+            <a class="btn btn-primary" href="{% url 'home:index' %}">Volver al inicio</a>
+            {% endif %}
+            -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}

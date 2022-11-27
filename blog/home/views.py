@@ -9,19 +9,58 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
-
+from home.models import New
 
 
 # Create your views here.
 
+class NewListView(ListView):
+    model = New
+    template_name = 'home/index.html'
 
-def index(request):
-    return render(
-        request=request,
-        context=dict(),
-        template_name="home/index.html",
-    )
 
+class NewDetailView(DetailView):
+    model = New
+    template_name = 'home/news_detail.html'
+
+
+class NewUpdateView(LoginRequiredMixin, UpdateView):
+    model = New
+    template_name = 'home/news_form.html'
+    fields = [
+        'title',
+        'subtitle',
+        'description',
+    ]
+    message_succes = 'Modificación exitosa'
+
+    def get_success_url(self):
+        new_id = self.kwargs['pk']
+        return reverse_lazy('home:new-detail', kwargs={
+            'pk': new_id
+        },
+        )
+
+class NewDeleteView(DeleteView):
+    model = New
+    template_name = 'home/news_confirm_delete.html'
+    success_url = reverse_lazy('home:index')
+
+
+class NewCreationView(LoginRequiredMixin, CreateView):
+    model = New
+    template_name = 'home/news_form.html'
+    success_url = reverse_lazy('home:index')
+
+    fields = [
+        'title',
+        'subtitle',
+        'description',
+    ]
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super(NewCreationView, self).form_valid(form)
 
 def register(request):
 
@@ -42,20 +81,23 @@ def register(request):
         template_name="registration/register.html",
     )
 
+
 class UserDetailView(LoginRequiredMixin, DetailView):
     model = User
     template_name = 'registration/user_detail.html'
     fields = ['fist_name', 'last_name', 'email']
 
+
 class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     template_name = 'registration/user_update.html'
-    fields = ['first_name','last_name','email']
+    fields = ['first_name', 'last_name', 'email']
     message_succes = 'Modificación exitosa'
 
     def get_success_url(self):
         user_id = self.kwargs["pk"]
-        return reverse_lazy("players:users-detail", kwargs={"pk": user_id})
+        return reverse_lazy("home:user-detail", kwargs={"pk": user_id})
+
 
 class UserDeleteView(LoginRequiredMixin, DeleteView):
     model = User
