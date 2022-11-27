@@ -29,10 +29,16 @@
             <h3>Datos del usuario</h3>
 
                 <ul>
+                    <li>Username: {{ user.username }}</li>
                     <li>Nombre y apellido: {{user.first_name}} {{user.last_name}}</li>
                     <li>Email: {{user.email}}</li>
                 </ul>
-
+                <hr>
+                <h4>Noticias</h4>
+                <ul>
+                    <li><a href="{% url 'home:new-add' %}">Crear nueva noticia »</a></li>
+                </ul>
+                <hr>
                 <h5>Opciones de cuenta</h5>
                 <ul>
                     <li><a href="{% url 'home:password-change' %}">Cambiar contraseña »</a></li>
