@@ -1,0 +1,48 @@
+{% extends '../home/index.html' %}
+{% load static %}
+
+{% block blog_title %}
+<title>Tenis+ | {{ new.title }}</title>
+{% endblock %}
+
+{% block blog_header %}
+<!-- Page Header-->
+<header class="masthead"
+    style="background-image: url('https://cdn.pixabay.com/photo/2016/11/29/01/14/athletes-1866487_960_720.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h2>{{ new.title }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block blog_main %}
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+
+            <p><b>{{ new.subtitle }}</b></p>
+            <hr>
+            <p>{{ new.description }}</p>
+            <hr>
+            <p>
+                Autor: {{ new.author.first_name }}, {{ new.author.last_name }} | Publicado: {{ new.created_at }}<br>
+                Última modificación: {{ new.updated_at }}
+            </p>
+            <!-- Si el usuario es quién publicó la noticia,
+                puede acceder a modificarla o eliminarla -->
+            {% if new.author.id == user.id %}
+            <a class="btn btn-primary" href="{% url 'home:new-update' new.id %}">Modificar</a>
+            <a class="btn btn-danger" href="{% url 'home:new-delete' new.id %}">Eliminar</a>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+{% endblock %}

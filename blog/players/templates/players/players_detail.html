@@ -28,8 +28,8 @@
                 <li>Correo: {{user.email}}</li>
             </ul>
 
-            <a class="btn btn-primary" href="{% url 'home:user-update' user.id %}">Modificar</a>
-            <a class="btn btn-danger" href="{% url 'home:user-delete' user.id %}">Eliminar</a>
+            <a class="btn btn-primary" href="{% url 'players:players-update' tennisplayer.id %}">Modificar</a>
+            <a class="btn btn-danger" href="{% url 'players:players-delete' tennisplayer.id %}">Eliminar</a>
 
         </div>
     </div>
