@@ -28,4 +28,5 @@ urlpatterns = [
     # Other views
     path('about/', views.about, name='about'),
     path('avatar/load/', views.avatar, name="avatar"),
+    path('routes/', views.list_paths, name='list-paths')
 ]
