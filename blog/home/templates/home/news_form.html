@@ -35,7 +35,7 @@
             <p>{{ message_succes }}</p>
             {% endif %}
 
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form.as_p}}
                 <input class="btn btn-primary" type="submit" value="Confirmar">
