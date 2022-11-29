@@ -34,14 +34,18 @@
                     <li>Email: {{user.email}}</li>
                 </ul>
                 <hr>
-                <h4>Noticias</h4>
+                {% if request.user.is_superuser %}
+                <h4>Crear contenido</h4>
                 <ul>
                     <li><a href="{% url 'home:new-add' %}">Crear nueva noticia »</a></li>
+                    <li><a href="{% url 'players:players-add' %}">Crear nuevo jugador »</a></li>
                 </ul>
                 <hr>
+                {% endif %}
                 <h5>Opciones de cuenta</h5>
                 <ul>
                     <li><a href="{% url 'home:password-change' %}">Cambiar contraseña »</a></li>
+                    <li><a href="{% url 'home:avatar' %}">Actualizar foto de perfil »</a></li>
                     <li><a href="{% url 'home:user-delete' user.id %}">Eliminar usuario »</a></li>
                 </ul>
                 

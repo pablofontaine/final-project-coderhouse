@@ -8,7 +8,7 @@
 {% block blog_header %}
 <!-- Page Header-->
 <header class="masthead"
-    style="background-image: url('https://cdn.pixabay.com/photo/2016/11/29/01/14/athletes-1866487_960_720.jpg')">
+    style="background-image: url('{{ new.image.url }}')">
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
@@ -27,6 +27,8 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
 
+            
+
             <p><b>{{ new.subtitle }}</b></p>
             <hr>
             <p>{{ new.description }}</p>
@@ -37,7 +39,7 @@
             </p>
             <!-- Si el usuario es quién publicó la noticia,
                 puede acceder a modificarla o eliminarla -->
-            {% if new.author.id == user.id %}
+            {% if request.user.is_superuser %}
             <a class="btn btn-primary" href="{% url 'home:new-update' new.id %}">Modificar</a>
             <a class="btn btn-danger" href="{% url 'home:new-delete' new.id %}">Eliminar</a>
             {% endif %}

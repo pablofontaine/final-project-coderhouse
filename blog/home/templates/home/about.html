@@ -1,0 +1,65 @@
+{% extends '../home/index.html' %}
+{% load static %}
+
+{% block blog_title %}
+<title>Tenis+ | Sobre nosotros</title>
+{% endblock %}
+
+{% block blog_header %}
+<!-- Page Header-->
+<header class="masthead"
+    style="background-image: url('https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Nosotros</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+{% block blog_main %}
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+
+            <h2>El proyecto</h2>
+            <p style="text-align: justify;">La siguiente web fué creada dentro del contexto del Curso de Python dictado
+                por Coderhouse, como entrega para el proyecto final.</p>
+            <h3>Integrantes</h3>
+            <ul>
+                <li>Pablo Nicolas, Fontaine Gilardi</li>
+                <li>Magalí, Nieva</li>
+                <li>Victor Gianfranco, Flores</li>
+            </ul>
+            <h4>Breve introducción</h4>
+            <p style="text-align: justify;">Se desarrolla una web tipo blog, que muestra noticias del Tenis.
+            </p>
+            <div style="text-align: justify;">
+                <ul>
+                    <li>Sistema de registro y autenticación (login y logout) de usuarios, mediante modulo nativo de Django.</li>
+                    <li>CRUD completo para la gestión de usuarios, mediante vistas basadas en clases.</li>
+                    <li>CRUD completo para la gestión de noticias, mediante vistas basadas en clases. Solo superusuarios
+                        tienen acceso a crear y modificar
+                        noticias.</li>
+                    <li>CRUD completo para la gestión de jugadores, mediante vistas basadas en clases. Solo superusuarios
+                        tienen acceso a crear y modificar
+                        jugadores.</li>
+                    <li>Los usuarios puede cargar un avatar personal, ver noticias y jugadores.</li>
+
+                        <ul>
+                            <li>Los usuarios utilizan el modelo por defecto User</li>
+                            <li>Las noticias utilizan el modelo New, creado para este sitio.</li>
+                            <li>Los jugadores utilizan el modelo Player, creado para este sitio.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

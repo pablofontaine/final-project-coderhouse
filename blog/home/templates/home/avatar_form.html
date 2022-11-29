@@ -1,15 +1,19 @@
 {% extends '../home/index.html' %}
+{% load static %}
+
+{% block blog_title %}
+<title>Tenis+ | Foto de perfil</title>
+{% endblock %}
 
 {% block blog_header %}
 <!-- Page Header-->
 <header class="masthead"
-    style="background-image: url('https://cdn.pixabay.com/photo/2016/11/29/01/14/athletes-1866487_960_720.jpg')">
+    style="background-image: url('https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')">
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
-                    <h1>Jugadores</h1>
-                    <span class="subheading">Crear nuevo jugador</span>
+                    <h2>Foto de perfil</h2>
                 </div>
             </div>
         </div>
@@ -23,24 +27,17 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
 
-            {% if request.user.is_superuser == True %}
-
-            <h3>Agregar nuevo jugador</h3>
-
-            {% if message %}
-            {{ message }}
+            {% if actually_image %}
+            <img style="border-radius: 50px; width: 130px;" src="{{ actually_image.image.url }}" alt="Foto de perfil">
             {% endif %}
 
-            <form method="POST">
+            <p><b>Usuario: </b>{{user.username}}<br><b>Nombre y apellido: </b>{{user.first_name}} {{user.last_name}}</p>
+
+            <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit" class="btn btn-primary">Crear jugador</button>
+                <button type="submit" class="btn btn-primary">Cargar Imagen</button>
             </form>
-
-            {% else %}
-            <p>No tienes permisos para modificar o editar jugadores</p>
-            <a class="btn btn-primary" href="{% url 'players:players-list' %}">Volver</a>
-            {% endif %}
 
         </div>
     </div>
