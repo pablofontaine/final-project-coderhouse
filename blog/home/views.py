@@ -5,6 +5,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 import os
 
+from django.conf import settings
+
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -14,6 +16,13 @@ from home.models import New, Avatar
 
 
 # Create your views here.
+
+def list_paths(request):
+    paths = []
+    for root, dirs, files in os.walk(settings.BASE_DIR):
+        for file in files:
+            paths.append(os.path.join(root, file))
+    return render(request, 'home/list_paths.html', {'paths': paths})
 
 @login_required
 def avatar(request):

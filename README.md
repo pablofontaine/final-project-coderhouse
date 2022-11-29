@@ -1,13 +1,21 @@
 # Proyecto final para Coderhouse
 Este proyecto es realizado por:
+- Fontaine Gilardi, Pablo Nicolas
 - Magali, Nieva
 - Victor Gianfranco, Flores
-- Fontaine Gilardi, Pablo Nicolas
 
 ## Temática del proyecto
 Realizado con Python, con framework Django.
-Hemos decidido realizar un blog de "cocina y recetas".
-- El proyecto cuenta con 3 aplicaciones, 
+Hemos decidido realizar un blog de "Tenis y Jugadores".
+
+- Sistema de registro y autenticación (login y logout) de usuarios, mediante modulo nativo de Django.
+- CRUD completo para la gestión de usuarios, mediante vistas basadas en clases.
+-CRUD completo para la gestión de noticias, mediante vistas basadas en clases. Solo superusuarios tienen acceso a crear y modificar noticias.
+- CRUD completo para la gestión de jugadores, mediante vistas basadas en clases. Solo superusuarios tienen acceso a crear y modificar jugadores.
+- Los usuarios puede cargar un avatar personal, ver noticias y jugadores.
+    - Los usuarios utilizan el modelo por defecto User
+    - Las noticias utilizan el modelo New, creado para este sitio.
+    - Los jugadores utilizan el modelo Player, creado para este sitio.
 
 ## Estructura del proyecto y ramas de trabajo
 Hemos dividido el proyecto de la siguiente manera, para organizar el trabajo.
