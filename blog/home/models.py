@@ -14,6 +14,7 @@ class New(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Autor')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Creación')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Última modificación')
+    image = models.ImageField(verbose_name='Imagen de portada', null=True, blank=True)
 
     class Meta:
         unique_together = ()
@@ -21,3 +22,10 @@ class New(models.Model):
 
     def __str__(self):
         return f'Codigo: {self.id} | Autor: {self.author.first_name} {self.author.last_name} | Título: {self.title}'
+
+class Avatar(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='avatar', null=True, blank=True)
+
+    def __str__(self):
+        return f'user: {self.user.username} | url: {self.image.url}'

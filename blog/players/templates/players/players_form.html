@@ -8,7 +8,7 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
-                    <h1>Modificar</h1>
+                    <h2>Crear/modificar</h2>
                     <span class="subheading">{{ tennisplayer.name }}</span>
                 </div>
             </div>
@@ -23,6 +23,8 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
 
+            {% if request.user.is_superuser == True %}
+
             <h3>Modificar jugador jugador</h3>
 
             {% if message_succes %}
@@ -35,6 +37,11 @@
                 <input class="btn btn-primary" type="submit" value="Confirmar">
                 <a class="btn btn-secondary" href="{% url 'players:players-list' %}">No, cancelar</a>
             </form>
+
+            {% else %}
+            <p>No tienes permisos para modificar o editar jugadores</p>
+            <a class="btn btn-primary" href="{% url 'players:players-list' %}">Volver</a>
+            {% endif %}
 
         </div>
     </div>
