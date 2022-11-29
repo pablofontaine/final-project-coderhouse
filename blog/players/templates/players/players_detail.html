@@ -8,8 +8,7 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
-                    <h1>Todo sobre</h1>
-                    <span class="subheading">{{ user.username }}</span>
+                    <h2>{{ tennisplayer.name }}</h2>
                 </div>
             </div>
         </div>
@@ -24,12 +23,14 @@
         <div class="col-md-10 col-lg-8 col-xl-7">
 
             <ul>
-                <li>Nombre y apellido: {{user.first_name}} {{user.last_name}}</li>
-                <li>Correo: {{user.email}}</li>
+                <li>Nombre y apellido: {{ tennisplayer.name }}</li>
+                <li>Estado: {% if tennisplayer.retired == True %}Retirado{% else %}En competencia{% endif %}</li>
             </ul>
 
+            {% if request.user.is_superuser == True %}
             <a class="btn btn-primary" href="{% url 'players:players-update' tennisplayer.id %}">Modificar</a>
             <a class="btn btn-danger" href="{% url 'players:players-delete' tennisplayer.id %}">Eliminar</a>
+            {% endif %}
 
         </div>
     </div>

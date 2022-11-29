@@ -23,6 +23,8 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
 
+            {% if request.user.is_superuser == True %}
+            
             <h3>Eliminar jugador</h3>
 
             <p>Confirma que quieres eliminar el jugador {{ tennisplayer.name }}</p>
@@ -32,6 +34,11 @@
                 <input class="btn btn-danger" type="submit" value="Si, eliminar">
                 <a class="btn btn-secondary" href="{% url 'players:players-list' %}">No, cancelar</a>
             </form>
+            
+            {% else %}
+            <p>No tienes permisos para modificar o editar jugadores</p>
+            <a class="btn btn-primary" href="{% url 'players:players-list' %}">Volver</a>
+            {% endif %}
 
         </div>
     </div>

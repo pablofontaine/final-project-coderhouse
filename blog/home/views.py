@@ -1,18 +1,54 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from home.forms import UserRegisterForm
+from home.forms import UserRegisterForm, AvatarForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.contrib.auth.decorators import login_required
+import os
 
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
-from home.models import New
+from home.models import New, Avatar
 
 
 # Create your views here.
+
+@login_required
+def avatar(request):
+    if request.method == "POST":
+        form = AvatarForm(request.POST, request.FILES)
+        if form.is_valid and len(request.FILES) != 0:
+            image = request.FILES["image"]
+            avatars = Avatar.objects.filter(user=request.user.id)
+            if not avatars.exists():
+                avatar = Avatar(user=request.user, image=image)
+            else:
+                avatar = avatars[0]
+                if len(avatar.image) > 0:
+                    os.remove(avatar.image.path)
+                avatar.image = image
+            avatar.save()
+            return redirect("home:index")
+
+    actually_image = Avatar.objects.filter(user=request.user.id)
+    form = AvatarForm()
+    return render(
+        request=request,
+        context={
+            "form": form,
+            'actually_image': actually_image[0]
+            },
+        template_name="home/avatar_form.html",
+    )
+
+def about(request):
+    return render(
+        request=request,
+        template_name='home/about.html',
+        context=dict(),
+    )
 
 class NewListView(ListView):
     model = New
@@ -31,6 +67,7 @@ class NewUpdateView(LoginRequiredMixin, UpdateView):
         'title',
         'subtitle',
         'description',
+        'image',
     ]
     message_succes = 'Modificación exitosa'
 
@@ -40,6 +77,7 @@ class NewUpdateView(LoginRequiredMixin, UpdateView):
             'pk': new_id
         },
         )
+
 
 class NewDeleteView(DeleteView):
     model = New
@@ -56,11 +94,13 @@ class NewCreationView(LoginRequiredMixin, CreateView):
         'title',
         'subtitle',
         'description',
+        'image',
     ]
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super(NewCreationView, self).form_valid(form)
+
 
 def register(request):
 
