@@ -41,7 +41,9 @@
            <hr>
            {% endfor %}
 
+           {% if user.is_superuser %}
             <a href="{% url 'players:players-add' %}" class="btn btn-primary">Crear nuevo jugador</a>
+            {% endif %}
         </div>
     </div>
 </div>
